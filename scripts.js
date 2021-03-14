@@ -5,13 +5,13 @@ function arrayRemove(arr, value) {
     });
 }
 
-var selectText = "Click Here"
+var selectText = "None"
 var drivers = [selectText, "HAM","BOT","VER"];
 var driversAvailable = [];
 var driversSelected = [];
 
 // number of drivers to choose
-var tableLen = 3;
+var tableLen = drivers.length - 1;
 
 function change(){
     // remove all non-selected options
@@ -34,6 +34,29 @@ function change(){
 }
     
 function loadDriversStart(){
+    var d = new Date();
+    var year = d.getFullYear()
+    console.log(year)
+
+    var request = new XMLHttpRequest()
+
+    request.open('GET', 'http://ergast.com/api/f1/' + year + '/drivers.json', true)
+    //request.open('GET', 'https://ghibliapi.herokuapp.com/films', true)
+    request.onload = function () {
+      // Begin accessing JSON data here
+      var data = JSON.parse(this.response)
+    
+      if (request.status >= 200 && request.status < 400) {
+          console.log(data)
+        //data.forEach((movie) => {
+        //  console.log(movie.title)
+        //})
+      } else {
+        console.log('error')
+      }
+    }
+    
+    request.send()
 
     // add available drivers to each dropdown
     for(var j = 0; j < tableLen; j++){
@@ -86,9 +109,7 @@ function getSelectedDrivers(){
         var driverSelected = table.value;
         selectArray.push(driverSelected);
         selectArray.push(m+1);
-        if (table.value != selectText) {
-            driversSelected.push(selectArray)
-        }
+        driversSelected.push(driverSelected)
         
     }
     console.log(driversSelected)
