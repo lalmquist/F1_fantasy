@@ -19,7 +19,7 @@ function loadDriversStart(){
             drivers.push(newDriver)
           }
 
-          writeToDropdowns()
+          createHTMLTable()
       } else {
         console.log('error')
       }
@@ -27,6 +27,21 @@ function loadDriversStart(){
     
     request.send()
 
+}
+
+function createHTMLTable(){
+  for (var i = 0; i <= tableLen - 1; i++){
+    tableLine = '<tr><th></th><th></th></tr><tr><td>'
+    tableLine += 'P' + (i + 1) + '</td><td>'
+    tableLine += '<select id="DriverList' + String(i) + '" onchange="change()">'
+    tableLine += '</select></td></tr>'
+
+    document.getElementById('table').innerHTML += tableLine;
+  }
+  tableLine ='</tr>'
+  document.getElementById('table').innerHTML += tableLine;
+
+  writeToDropdowns()
 }
 
 function writeToDropdowns(){
