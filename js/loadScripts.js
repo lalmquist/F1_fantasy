@@ -15,7 +15,6 @@ function loadDriversStart(){
       if (request.status >= 200 && request.status < 400) {
           for (var driver in data.MRData.DriverTable.Drivers){
             var newDriver = data.MRData.DriverTable.Drivers[driver].code
-            //console.log(data.MRData.DriverTable.Drivers[driver].code)
             drivers.push(newDriver)
           }
 
@@ -56,5 +55,20 @@ function writeToDropdowns(){
           opt.value = drivers[i];
           sel.appendChild(opt);
       }
+  }
+
+  setCurrentPicks()
+}
+
+function setCurrentPicks() {
+  // get data from database for user and team
+
+  // parse and shit
+
+  // add current driver picks to each dropdown
+  for(var j = 0; j < tableLen; j++){
+    var driverstring = 'DriverList' + j;
+    var sel = document.getElementById(driverstring);
+    //sel.value = 'BOT'
   }
 }
