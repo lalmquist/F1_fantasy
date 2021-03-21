@@ -6,12 +6,12 @@ function arrayRemove(arr, value) {
 }
 
 var selectText = "None"
-var drivers = [selectText, "HAM","BOT","VER", "RIC", "GAS"];
+var drivers = [selectText];
 var driversAvailable = [];
 var driversSelected = [];
 
-// number of drivers to choose
-var tableLen = drivers.length - 1;
+// number of positions to guess
+var tableLen = 5
 
 function change(){
     // remove all non-selected options
