@@ -1,4 +1,6 @@
 function loadDriversStart(){
+    loadLeagues()
+
     var d = new Date();
     var year = d.getFullYear()
 
@@ -65,10 +67,14 @@ function setCurrentPicks() {
 
   // parse and shit
 
+  // TEMP
+  var user = 'Logan'
+  var userData = ['HAM','BOT','VER','RIC','VET']
+
   // add current driver picks to each dropdown
   for(var j = 0; j < tableLen; j++){
     var driverstring = 'DriverList' + j;
     var sel = document.getElementById(driverstring);
-    //sel.value = 'BOT'
+    sel.value = userData[j]
   }
 }

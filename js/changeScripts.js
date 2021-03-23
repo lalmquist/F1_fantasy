@@ -5,6 +5,10 @@ function arrayRemove(arr, value) {
     });
 }
 
+// not sure where to get this data from hmmm
+var user
+var league
+
 var selectText = "None"
 var drivers = [selectText];
 var driversAvailable = [];
@@ -54,8 +58,7 @@ function removeSelected(){
                 opt.innerHTML = driversAvailable[i];
                 opt.value = driversAvailable[i];
                 sel.appendChild(opt);
-                
-                
+
                 str += "<option>" + driversAvailable[i] + "</option>"
             }
         }
@@ -74,4 +77,10 @@ function getSelectedDrivers(){
         
     }
     console.log(driversSelected)
+    writeToDatabase(user,league,driversSelected)
+}
+
+function writeToDatabase(user,league,data){
+    // write back to database
+    console.log(data)
 }
