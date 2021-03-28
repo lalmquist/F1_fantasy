@@ -1,3 +1,4 @@
+var currentLeague = '';
 function loadLeagues() {
     // get data from database for user teams
     // parse and shit
@@ -13,4 +14,21 @@ function loadLeagues() {
         str += "<option>" + userLeagues[j] + "</option>"
     }
     sel.innerHTML = str;
+
+    // get league data
+    currentLeague = sel.value
   }
+
+function leagueChange() {
+    var sel = document.getElementById('userLeagueSelect');
+    loadDriversStart(false)
+}
+
+function getLeagueData(league) {
+    // do transaction stuff
+    if (league == 'League01'){
+        return ['SAI','GAS','HAM','RIC','BOT']
+    } else {
+        return ['None','VET','VER','RIC','SAI']
+    }
+}

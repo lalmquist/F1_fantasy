@@ -1,6 +1,12 @@
-function loadDriversStart(){
-    loadLeagues()
+var driversSelected = []
 
+function firstLoad(){
+  createHTMLTable()
+  loadDriversStart(true)
+}
+
+function loadDriversStart(loadLeagueBOOL){
+    drivers = [selectText];
     var d = new Date();
     var year = d.getFullYear()
 
@@ -19,18 +25,20 @@ function loadDriversStart(){
             var newDriver = data.MRData.DriverTable.Drivers[driver].code
             drivers.push(newDriver)
           }
-
-          createHTMLTable()
+          // create league options
+          if (loadLeagueBOOL) {
+            loadLeagues()
+          }
+          writeToDropdowns()
       } else {
         console.log('error')
       }
     }
-    
     request.send()
-
 }
 
 function createHTMLTable(){
+  // create driver options
   for (var i = 0; i <= tableLen - 1; i++){
     tableLine = '<tr><th></th><th></th></tr><tr><td>'
     tableLine += 'P' + (i + 1) + '</td><td>'
@@ -41,11 +49,18 @@ function createHTMLTable(){
   }
   tableLine ='</tr>'
   document.getElementById('table').innerHTML += tableLine;
-
-  writeToDropdowns()
 }
 
 function writeToDropdowns(){
+    // remove all  options
+    for(var j = 0; j < tableLen; j++){
+      var driverstring = 'DriverList' + j;
+      var sel = document.getElementById(driverstring);
+      var selected = sel.value
+      var str = ""
+      sel.innerHTML = str;
+      sel.value = selected
+      }
   
   // add available drivers to each dropdown
   for(var j = 0; j < tableLen; j++){
@@ -58,23 +73,20 @@ function writeToDropdowns(){
           sel.appendChild(opt);
       }
   }
+  // get current league
+  var sel = document.getElementById('userLeagueSelect');
+  currentLeague = sel.value
+  driversSelected = getLeagueData(currentLeague)
 
-  setCurrentPicks()
+  // set picks for current league
+  setCurrentPicks(driversSelected)
 }
 
-function setCurrentPicks() {
-  // get data from database for user and team
-
-  // parse and shit
-
-  // TEMP
-  var user = 'Logan'
-  var userData = ['HAM','BOT','VER','RIC','VET']
-
+function setCurrentPicks(driversSelected) {
   // add current driver picks to each dropdown
   for(var j = 0; j < tableLen; j++){
     var driverstring = 'DriverList' + j;
     var sel = document.getElementById(driverstring);
-    sel.value = userData[j]
+    sel.value = driversSelected[j]
   }
 }

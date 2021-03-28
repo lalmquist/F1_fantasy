@@ -20,7 +20,6 @@ var tableLen = 5
 function change(){
     // remove all non-selected options
     for(var j = 0; j < tableLen; j++){
-        removeArray =[]
         var driverstring = 'DriverList' + j;
         var sel = document.getElementById(driverstring);
         var selected = sel.value
@@ -76,11 +75,9 @@ function getSelectedDrivers(){
         driversSelected.push(driverSelected)
         
     }
-    console.log(driversSelected)
     writeToDatabase(user,league,driversSelected)
 }
 
 function writeToDatabase(user,league,data){
     // write back to database
-    console.log(data)
 }
